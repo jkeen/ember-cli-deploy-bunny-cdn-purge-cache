@@ -17,7 +17,7 @@
             persist-credentials: false
         - uses: ./.github/actions/pnpm
         - name: Release
-          working-directory: ./ember-cli-deploy-bunny-cdn-purge-cache
+          working-directory: ./
           run: node_modules/.bin/semantic-release
           env:
             NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

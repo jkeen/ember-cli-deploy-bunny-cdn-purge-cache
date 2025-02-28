@@ -15,7 +15,6 @@
     cancel-in-progress: true
   env:
     CI: true
-    dist: ember-stereo/dist
   jobs:
     install_dependencies:
       name: Install Dependencies

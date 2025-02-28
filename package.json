@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-deploy-bunny-cdn-purge-cache",
-  "version": "0.0.0-semantic-release",
+  "version": "1.0.0-semantic-release",
   "description": "Ember-cli-deploy plugin for purging cache on Bunny CDN",
   "keywords": [
     "ember-addon",
