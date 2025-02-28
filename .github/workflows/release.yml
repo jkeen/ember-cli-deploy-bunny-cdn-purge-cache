@@ -6,7 +6,7 @@
 
   env:
     CI: true
-    dist: ember-cli-deploy-bunny-cdn-purge-cache/dist
+    dist: ./
   jobs:
     release:
       name: Release

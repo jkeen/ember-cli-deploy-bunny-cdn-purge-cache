@@ -1,7 +1,6 @@
 'use strict';
 
 let DeployPluginBase = require('ember-cli-deploy-plugin');
-
 module.exports = {
   name: require('./package').name,
 

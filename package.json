@@ -1,24 +1,125 @@
 {
-  "private": true,
-  "repository": "",
+  "name": "ember-cli-deploy-bunny-cdn-purge-cache",
+  "version": "0.0.0-semantic-release",
+  "description": "Ember-cli-deploy plugin for purging cache on Bunny CDN",
+  "keywords": [
+    "ember-addon",
+    "ember-cli-deploy-plugin"
+  ],
+  "repository": "https://github.com/jkeen/ember-cli-deploy-bunny-cdn-purge-cache",
   "license": "MIT",
   "author": "",
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist"
+  ],
   "scripts": {
-    "build": "pnpm --filter ember-cli-deploy-bunny-cdn-purge-cache build",
-    "lint": "pnpm --filter '*' lint",
-    "lint:fix": "pnpm --filter '*' lint:fix",
-    "prepare": "pnpm build",
-    "start": "concurrently 'pnpm:start:*' --restart-after 5000 --prefixColors auto",
-    "start:addon": "pnpm --filter ember-cli-deploy-bunny-cdn-purge-cache start --no-watch.clearScreen",
-    "start:test-app": "pnpm --filter test-app start",
-    "test": "pnpm --filter '*' test",
-    "test:ember": "pnpm --filter '*' test:ember",
-    "semantic-release": "pnpm --filter ember-cli-deploy-bunny-cdn-purge-cache run semantic-release"
+    "semantic-release": "semantic-release"
   },
-  "packageManager": "pnpm@10.0.0",
   "devDependencies": {
-    "concurrently": "^9.1.2",
-    "prettier": "^3.0.3",
-    "prettier-plugin-ember-template-tag": "^2.0.2"
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/runtime": "^7.25.6",
+    "@eslint/js": "^9.17.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "ember-cli": "^3.28.6",
+    "ember-cli-deploy-plugin": "^0.2.9",
+    "eslint": "^9.17.0",
+    "semantic-release": "^19.0.3"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {},
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "releaseRules": [
+            {
+              "type": "*!",
+              "release": "major"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "build",
+              "release": "patch"
+            },
+            {
+              "type": "ci",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "refactor",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            }
+          ],
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES",
+              "BREAKING",
+              "BREAKING CHANGE!",
+              "BREAKING CHANGES!",
+              "BREAKING!"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogTitle": "ember-stereo changelog",
+          "changelogFile": "../CHANGELOG.md"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ],
+          "message": "${nextRelease.version} CHANGELOG [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ],
+    "debug": true,
+    "dryRun": false
   }
 }
