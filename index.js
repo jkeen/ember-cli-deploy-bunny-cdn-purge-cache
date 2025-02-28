@@ -1,6 +1,7 @@
 'use strict';
 
 let DeployPluginBase = require('ember-cli-deploy-plugin');
+let fetch = require('node-fetch');
 module.exports = {
   name: require('./package').name,
 

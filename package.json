@@ -121,5 +121,8 @@
     ],
     "debug": true,
     "dryRun": false
+  },
+  "dependencies": {
+    "ember-fetch": "^8.1.2"
   }
 }
