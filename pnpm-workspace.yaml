@@ -1,0 +1,3 @@
+packages:
+  - 'ember-cli-deploy-bunny-cdn-purge-cache'
+  - 'test-app'
