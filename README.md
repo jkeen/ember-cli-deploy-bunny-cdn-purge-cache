@@ -1,31 +1,35 @@
 # ember-cli-deploy-bunny-cdn-purge-cache
-<<<<<<< HEAD
-Purge the cache at Bunny CDN after deploying 
-||||||| (empty tree)
-=======
 
-[Short description of the addon.]
+Am ember-cli-deploy-plugin to purge the cache on bunny CDN
 
-## Compatibility
+## Quick Start
 
-- Ember.js v4.12 or above
-- Embroider or ember-auto-import v2
+To get this added to your deploy pipeline, do the following:
 
-## Installation
+- Install this plugin
 
-```
-ember install ember-cli-deploy-bunny-cdn-purge-cache
+```bash
+$ ember install ember-cli-deploy-bunny-cdn-purge-cache
 ```
 
-## Usage
+- Place the following configuration into `config/deploy.js`
 
-[Longer description of how to use the addon in apps.]
+```javascript
+module.exports = function(deployTarget) {
+  var ENV = { };
 
-## Contributing
+  if (deployTarget === 'production') {
+    ENV['bunny-cdn-purge-cache'] = {
+      apiKey: process.env.BUNNY_API_KEY,
+      pullZoneId: process.env.BUNNY_PULL_ZONE_ID,
+      pullZoneName: process.env.BUNNY_PULL_ZONE_NAME,
+      fileList: ['index.html', 'VERSION.txt', ''] // Clear the index and VERSION.txt when we activate a new version
+    };
+  }
 
-See the [Contributing](CONTRIBUTING.md) guide for details.
-
+  return ENV;
+};
+```
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
->>>>>>> 82bf671 (Initial Commit from Ember CLI v6.2.2)

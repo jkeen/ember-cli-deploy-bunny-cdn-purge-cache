@@ -1,0 +1,24 @@
+---
+  name: Generate New Release
+
+  on:
+    workflow_dispatch:
+
+  env:
+    CI: true
+    dist: ember-cli-deploy-bunny-cdn-purge-cache/dist
+  jobs:
+    release:
+      name: Release
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            persist-credentials: false
+        - uses: ./.github/actions/pnpm
+        - name: Release
+          working-directory: ./ember-cli-deploy-bunny-cdn-purge-cache
+          run: node_modules/.bin/semantic-release
+          env:
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

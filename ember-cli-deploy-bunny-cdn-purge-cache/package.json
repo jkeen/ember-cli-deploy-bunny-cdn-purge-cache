@@ -1,13 +1,15 @@
 {
   "name": "ember-cli-deploy-bunny-cdn-purge-cache",
-  "version": "0.0.0",
-  "description": "The default blueprint for Embroider v2 addons.",
+  "version": "0.1.0",
+  "description": "Ember-cli-deploy plugin for purging cache on Bunny CDN",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-cli-deploy-plugin"
   ],
-  "repository": "",
+  "repository": "https://github.com/jkeen/ember-cli-deploy-bunny-cdn-purge-cache",
   "license": "MIT",
   "author": "",
+  "main": "./dist/index.js",
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
@@ -30,13 +32,18 @@
     "lint:js:fix": "eslint . --fix",
     "prepack": "rollup --config",
     "start": "rollup --config --watch",
+    "semantic-release": "semantic-release",
     "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
   },
   "dependencies": {
+    "ember-cli-deploy-plugin": "^0.2.9",
     "@embroider/addon-shim": "^1.8.9",
     "decorator-transforms": "^2.2.2"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^19.0.3",
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/runtime": "^7.25.6",
@@ -58,9 +65,6 @@
     "rollup": "^4.22.5",
     "rollup-plugin-copy": "^3.5.0"
   },
-  "peerDependencies": {
-    "ember-source": ">= 4.12.0"
-  },
   "ember": {
     "edition": "octane"
   },
@@ -69,5 +73,94 @@
     "type": "addon",
     "main": "addon-main.cjs",
     "app-js": {}
+  },
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "releaseRules": [
+            {
+              "type": "*!",
+              "release": "major"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "build",
+              "release": "patch"
+            },
+            {
+              "type": "ci",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "refactor",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            }
+          ],
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES",
+              "BREAKING",
+              "BREAKING CHANGE!",
+              "BREAKING CHANGES!",
+              "BREAKING!"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogTitle": "ember-stereo changelog",
+          "changelogFile": "../CHANGELOG.md"
+        }
+      ],
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ],
+          "message": "${nextRelease.version} CHANGELOG [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ],
+    "debug": true,
+    "dryRun": false
   }
 }
