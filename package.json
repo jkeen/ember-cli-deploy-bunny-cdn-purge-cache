@@ -8,12 +8,7 @@
   ],
   "repository": "https://github.com/jkeen/ember-cli-deploy-bunny-cdn-purge-cache",
   "license": "MIT",
-  "author": "",
-  "files": [
-    "addon-main.cjs",
-    "declarations",
-    "dist"
-  ],
+  "author": "Jeff Keen",
   "scripts": {
     "semantic-release": "semantic-release"
   },
@@ -29,10 +24,6 @@
     "eslint": "^9.17.0",
     "semantic-release": "^19.0.3"
   },
-  "ember": {
-    "edition": "octane"
-  },
-  "ember-addon": {},
   "release": {
     "branches": [
       "main",

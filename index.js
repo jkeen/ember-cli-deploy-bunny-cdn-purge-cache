@@ -1,19 +1,20 @@
 'use strict';
 
 let DeployPluginBase = require('ember-cli-deploy-plugin');
+const packageJson = require("./package.json");
 let fetch = require('node-fetch');
-module.exports = {
-  name: require('./package').name,
 
-  isDevelopingAddon() {
-    return true;
-  },
+module.exports = {
+  name: packageJson.name,
 
   createDeployPlugin(options) {
     var DeployPlugin = DeployPluginBase.extend({
       name: options.name,
       defaultConfig: {
         fileList: [],
+        environment(context) {
+          return context.deployTarget;
+        },
       },
 
       requiredConfig: ['pullZoneId', 'pullZoneName', 'apiKey', 'fileList'],
